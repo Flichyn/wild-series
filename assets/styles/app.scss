@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 :root {
     --primary-color: #FA6868;
     --second-color: #C4C4C4;
@@ -8,4 +10,13 @@
     --spacing-4:calc(var(--spacing) * 4);
     --font-text: 'Roboto', sans-serif;
     --font-title: 'Asul', sans-serif;
+}
+
+$theme-colors: (
+    "primary": #FA6868,
+    "danger": #C4C4C4
+);
+
+body {
+    background-color: #C4C4C4;
 }
