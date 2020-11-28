@@ -1,0 +1,11 @@
+:root {
+    --primary-color: #FA6868;
+    --second-color: #C4C4C4;
+    --dark: #434242;
+    --spacing:8px;
+    --spacing-2:calc(var(--spacing) * 2);
+    --spacing-3:calc(var(--spacing) * 3);
+    --spacing-4:calc(var(--spacing) * 4);
+    --font-text: 'Roboto', sans-serif;
+    --font-title: 'Asul', sans-serif;
+}
