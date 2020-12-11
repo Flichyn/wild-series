@@ -3,45 +3,92 @@
 namespace App\Controller;
 
 use App\Entity\Episode;
+use App\Form\EpisodeType;
+use App\Repository\EpisodeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/episodes", name="episode_")
+ * @Route("/episode")
  */
 class EpisodeController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="episode_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(EpisodeRepository $episodeRepository): Response
     {
-        $episodes = $this->getDoctrine()
-            ->getRepository(Episode::class)
-            ->findAll();
-
         return $this->render('episode/index.html.twig', [
-            'episodes' => $episodes,
+            'episodes' => $episodeRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/show/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="show")
+     * @Route("/new", name="episode_new", methods={"GET","POST"})
      */
-    public function show(int $id): Response
+    public function new(Request $request): Response
     {
-        $episode = $this->getDoctrine()
-            ->getRepository(Episode::class)
-            ->findOneBy(['id' => $id]);
+        $episode = new Episode();
+        $form = $this->createForm(EpisodeType::class, $episode);
+        $form->handleRequest($request);
 
-        if (!$episode) {
-            throw $this->createNotFoundException(
-                'No episode with id : ' . $id . ' found in episode\'s table.'
-            );
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($episode);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('episode_index');
         }
+
+        return $this->render('episode/new.html.twig', [
+            'episode' => $episode,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="episode_show", methods={"GET"})
+     */
+    public function show(Episode $episode): Response
+    {
         return $this->render('episode/show.html.twig', [
             'episode' => $episode,
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="episode_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Episode $episode): Response
+    {
+        $form = $this->createForm(EpisodeType::class, $episode);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('episode_index');
+        }
+
+        return $this->render('episode/edit.html.twig', [
+            'episode' => $episode,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="episode_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Episode $episode): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$episode->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($episode);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('episode_index');
     }
 }
