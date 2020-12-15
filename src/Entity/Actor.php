@@ -71,6 +71,9 @@ class Actor
     public function removeProgram(Program $program): self
     {
         $this->programs->removeElement($program);
+        if ($this->programs->removeElement($program)) {
+            $program->removeActor($this);
+        }
 
         return $this;
     }
