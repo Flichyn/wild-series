@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} | {{ program.title }} - Liste des épisodes de la saison {{ season.number }}{% endblock %}
+{% block body %}
+    <h1>{{ program.title }} - Saison {{ season.number }}</h1>
+    <h2>{{ season.year }}</h2>
+    <ul>
+    {% for episode in season.episodes %}
+        <li>{{ episode.number }} - {{ episode.title }}</li>
+     {% else %}
+        <p>Nous n'avons pas encore les informations des épisodes pour cette série. Veuillez nous excuser.</p>
+    {% endfor %}
+    </ul>
+{% endblock %}
