@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ parent() }} | {{ program.title }} - Saison {{ season.number }} - Épisode {{ episode.number }}
+{% endblock %}
+{% block body %}
+    <h1>{{ program.title }} - Saison {{ season.number }}</h1>
+    <h2>Épisode {{ episode.number }} - {{ episode.title }}</h2>
+    <p>{{ episode.synopsis }}</p>
+{% endblock %}
