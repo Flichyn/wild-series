@@ -33,6 +33,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="new")
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function new(Request $request)
     {
@@ -58,11 +59,11 @@ class ProgramController extends AbstractController
      */
     public function show(Program $program): Response
     {
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with that ID found in program\'s table.'
-            );
-        }
+//        if (!$program) {
+//            throw $this->createNotFoundException(
+//                'No program with that ID found in program\'s table.'
+//            );
+//        }
         return $this->render('program/show.html.twig', [
             'program' => $program,
         ]);
@@ -93,6 +94,9 @@ class ProgramController extends AbstractController
 
     /**
      * @Route("{/id}", name="delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Program $program
+     * @return Response
      */
     public function delete(Request $request, Program $program): Response
     {
@@ -135,8 +139,9 @@ class ProgramController extends AbstractController
      * @param Program $program
      * @param Season $season
      * @param Episode $episode
+     * @return Response
      */
-    public function showEpisode(Program $program, Season $season, Episode $episode)
+    public function showEpisode(Program $program, Season $season, Episode $episode): Response
     {
         if (!$program) {
             throw $this->createNotFoundException(
