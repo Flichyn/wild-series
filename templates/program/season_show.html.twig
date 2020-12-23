@@ -5,7 +5,7 @@
     <h2>{{ season.year }}</h2>
     <ul>
     {% for episode in season.episodes %}
-        <li><a href="{{ path('program_episode_show',{program: program.id, season: season.id, episode: episode.id}) }}">{{ episode.number }} - {{ episode.title }}</a></li>
+        <li><a href="{{ path('program_episode_show',{program: program.slug, season: season.id, episode: episode.slug}) }}">{{ episode.number }} - {{ episode.title }}</a></li>
      {% else %}
         <p>Nous n'avons pas encore les informations des épisodes pour cette série. Veuillez nous excuser.</p>
     {% endfor %}

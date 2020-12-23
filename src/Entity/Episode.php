@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EpisodeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,21 @@ class Episode
      * @ORM\Column(type="text", nullable=true)
      */
     private $synopsis;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Actor::class, inversedBy="episodes")
+     */
+    private $actors;
+
+    public function __construct()
+    {
+        $this->actors = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +104,42 @@ class Episode
     public function setSynopsis(?string $synopsis): self
     {
         $this->synopsis = $synopsis;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Actor[]
+     */
+    public function getActors(): Collection
+    {
+        return $this->actors;
+    }
+
+    public function addActor(Actor $actor): self
+    {
+        if (!$this->actors->contains($actor)) {
+            $this->actors[] = $actor;
+        }
+
+        return $this;
+    }
+
+    public function removeActor(Actor $actor): self
+    {
+        $this->actors->removeElement($actor);
 
         return $this;
     }

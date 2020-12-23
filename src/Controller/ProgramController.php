@@ -6,6 +6,8 @@ use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
 use App\Form\ProgramType;
+use App\Service\Slugify;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,15 +35,18 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="new")
      * @param Request $request
+     * @param Slugify $slugify
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request)
+    public function new(Request $request, Slugify $slugify)
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             $entityManager->persist($program);
             $entityManager->flush();
             return $this->redirectToRoute('program_index');
@@ -53,7 +58,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="show")
+     * @Route("/{slug}", methods={"GET"}, name="show")
      * @param Program $program
      * @return Response
      */
@@ -70,17 +75,19 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit", methods={"GET", "POST"})
+     * @Route("/{slug}/edit", name="edit", methods={"GET", "POST"})
      * @param Request $request
      * @param Program $program
+     * @param Slugify $slugify
      * @return Response
      */
-    public function edit(Request $request, Program $program): Response
+    public function edit(Request $request, Program $program, Slugify $slugify): Response
     {
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $program->setSlug($slugify->generate($program->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('program_index');
@@ -111,23 +118,14 @@ class ProgramController extends AbstractController
 
     /**
      * @Route("/{program}/season/{season}", methods={"GET"}, name="season_show")
+     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"program": "slug"}})
+     * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"season": "id"}})
      * @param Program $program
      * @param Season $season
      * @return Response
      */
     public function showSeason(Program $program, Season $season): Response
     {
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with that ID found in program\'s table.'
-            );
-        }
-        if (!$season) {
-            throw $this->createNotFoundException(
-                'No season with that ID found in season\'s table.'
-            );
-        }
-
         return $this->render('program/season_show.html.twig', [
             'program' => $program,
             'season' => $season
@@ -136,6 +134,9 @@ class ProgramController extends AbstractController
 
     /**
      * @Route("/{program}/seasons/{season}/episodes/{episode}", name="episode_show")
+     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"program": "slug"}})
+     * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"season": "id"}})
+     * @ParamConverter("episode", class="App\Entity\Episode", options={"mapping": {"episode": "slug"}})
      * @param Program $program
      * @param Season $season
      * @param Episode $episode
@@ -143,22 +144,6 @@ class ProgramController extends AbstractController
      */
     public function showEpisode(Program $program, Season $season, Episode $episode): Response
     {
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with that ID found in program\'s table.'
-            );
-        }
-        if (!$season) {
-            throw $this->createNotFoundException(
-                'No season with that ID found in season\'s table.'
-            );
-        }
-        if (!$episode) {
-            throw $this->createNotFoundException(
-                'No season with that ID found in episode\'s table.'
-            );
-        }
-
         return $this->render('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,

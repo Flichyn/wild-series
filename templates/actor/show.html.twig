@@ -4,7 +4,7 @@
     <h1>{{ actor.name }}</h1>
     <ul>Vous pouvez retrouver cet acteur dans ces séries :
         {% for program in actor.programs %}
-            <li><a href="{{ path("program_show", { id: program.id }) }}">{{ program.title }}</a></li>
+            <li><a href="{{ path("program_show", { slug: program.slug }) }}">{{ program.title }}</a></li>
         {% else %}
             Aucune série trouvée.
         {% endfor %}
