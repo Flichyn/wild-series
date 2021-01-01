@@ -11,6 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -36,9 +39,11 @@ class ProgramController extends AbstractController
      * @Route("/new", name="new")
      * @param Request $request
      * @param Slugify $slugify
+     * @param MailerInterface $mailer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function new(Request $request, Slugify $slugify)
+    public function new(Request $request, Slugify $slugify, MailerInterface $mailer)
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -49,6 +54,14 @@ class ProgramController extends AbstractController
             $program->setSlug($slug);
             $entityManager->persist($program);
             $entityManager->flush();
+
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to('your_email@example.com')
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView('program/newProgramEmail.html.twig', ['program' => $program]));
+            $mailer->send($email);
+
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/new.html.twig', [

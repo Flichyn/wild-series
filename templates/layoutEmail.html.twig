@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Wild Series{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="/build/app.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -14,9 +14,6 @@
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
-<header>
-    {% include "includes/_navbar.html.twig" %}
-</header>
 <body>
 {% block body %}{% endblock %}
 {% block javascripts %}
