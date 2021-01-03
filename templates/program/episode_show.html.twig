@@ -6,4 +6,24 @@
     <h1>{{ program.title }} - Saison {{ season.number }}</h1>
     <h2>Épisode {{ episode.number }} - {{ episode.title }}</h2>
     <p>{{ episode.synopsis }}</p>
+    <h2>Commentaires</h2>
+    <ul>
+        {% for comment in episode.comments %}
+        <br>
+        <li>
+            <p>Auteur : {{ comment.author.email }}</p>
+            <p>Note : {{ comment.rate }}</p>
+            <p>Commentaire : {{ comment.comment }}</p>
+        </li><br>
+        {% else %}
+            <p>Aucun commentaire n'a été rédigé pour cet épisode.</p>
+        {% endfor %}
+    </ul>
+    {% if app.user %}
+        <h2>Écrire un commentaire</h2>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Ajouter un commentaire">
+        {{ form_end(form) }}
+    {% endif %}
 {% endblock %}
