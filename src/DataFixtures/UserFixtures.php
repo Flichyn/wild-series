@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
@@ -26,6 +27,7 @@ class UserFixtures extends Fixture
             $contributor,
             'contributorpassword'
         ));
+        $this->addReference('user_' . 0, $contributor);
 
         $manager->persist($contributor);
 
@@ -37,6 +39,7 @@ class UserFixtures extends Fixture
             $admin,
             'adminpassword'
         ));
+        $this->addReference('user_' . 1, $admin);
 
         $manager->persist($admin);
 
