@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
@@ -30,9 +31,10 @@ class ProgramController extends AbstractController
      * @Route("/", name="index")
      * @param Request $request
      * @param ProgramRepository $programRepository
+     * @param SessionInterface $session
      * @return Response
      */
-    public function index(Request $request, ProgramRepository $programRepository): Response
+    public function index(Request $request, ProgramRepository $programRepository, SessionInterface $session): Response
     {
         $form = $this->createForm(SearchProgramFormType::class);
         $form->handleRequest($request);
@@ -78,6 +80,8 @@ class ProgramController extends AbstractController
                 ->html($this->renderView('program/newProgramEmail.html.twig', ['program' => $program]));
             $mailer->send($email);
 
+            $this->addFlash('success', 'The new program has been created !');
+
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/new.html.twig', [
@@ -122,6 +126,8 @@ class ProgramController extends AbstractController
             $program->setSlug($slugify->generate($program->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'The program has been updated !');
+
             return $this->redirectToRoute('program_index');
         }
 
@@ -132,7 +138,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("{/id}", name="delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      * @param Request $request
      * @param Program $program
      * @return Response
@@ -143,6 +149,8 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($program);
             $entityManager->flush();
+
+            $this->addFlash('danger', 'The new program has been deleted !');
         }
 
         return $this->redirectToRoute('program_index');

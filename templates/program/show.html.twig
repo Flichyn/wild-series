@@ -23,5 +23,7 @@
         {% endfor %}
     </ul>
 
+    {{ include('program/_delete_form.html.twig') }}
+
     <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
 {% endblock %}
