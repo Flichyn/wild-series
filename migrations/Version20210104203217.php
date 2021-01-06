@@ -21,8 +21,8 @@ final class Version20210104203217 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE program CHANGE owner_id owner_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE program ADD CONSTRAINT FK_92ED77847E3C61F9 FOREIGN KEY (owner_id) REFERENCES user (id)');
-        $this->addSql('CREATE INDEX IDX_92ED77847E3C61F9 ON program (owner_id)');
+//        $this->addSql('ALTER TABLE program ADD CONSTRAINT FK_92ED77847E3C61F9 FOREIGN KEY (owner_id) REFERENCES user (id)');
+//        $this->addSql('CREATE INDEX IDX_92ED77847E3C61F9 ON program (owner_id)');
     }
 
     public function down(Schema $schema) : void

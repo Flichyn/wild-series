@@ -20,9 +20,9 @@ final class Version20201130112339 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE program ADD category_id INT NOT NULL');
-        $this->addSql('ALTER TABLE program ADD CONSTRAINT FK_92ED778412469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
-        $this->addSql('CREATE INDEX IDX_92ED778412469DE2 ON program (category_id)');
+//        $this->addSql('ALTER TABLE program ADD category_id INT NOT NULL');
+//        $this->addSql('ALTER TABLE program ADD CONSTRAINT FK_92ED778412469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+//        $this->addSql('CREATE INDEX IDX_92ED778412469DE2 ON program (category_id)');
     }
 
     public function down(Schema $schema) : void

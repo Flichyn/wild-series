@@ -20,7 +20,7 @@ final class Version20201223000932 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE episode ADD slug VARCHAR(255) NOT NULL');
+//        $this->addSql('ALTER TABLE episode ADD slug VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema) : void
