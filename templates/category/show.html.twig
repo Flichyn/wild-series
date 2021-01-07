@@ -9,7 +9,7 @@
         <div class="media-body">
             <h2 class="mt-0">{{ program.id }}/ {{ program.title }}</h2>
             <p>{{ program.summary }}</p>
-            <a href="{{ path('program_show', { id : program.id }) }}">Voir la série</a>
+            <a href="{{ path('program_show', { slug : program.slug }) }}">Voir la série</a>
         </div>
     </div>
     {% else %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Program;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,6 +58,8 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{categoryName}", methods={"GET"}, name="show")
+     * @param string $categoryName
+     * @return Response
      */
     public function show(string $categoryName): Response
     {
@@ -66,13 +69,13 @@ class CategoryController extends AbstractController
 
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+            ->findBy(['category' => $category], ['id' => 'DESC'], 5);
 
-        if (!$programs) {
-            throw $this->createNotFoundException(
-                'No program found with "' . $categoryName . '" as category name in program\'s table.'
-            );
-        }
+//        if (!$programs) {
+//            throw $this->createNotFoundException(
+//                'No program in '.$categoryName.' category found in program\'s table.'
+//            );
+//        }
 
         return $this->render('category/show.html.twig', [
             'programs' => $programs,

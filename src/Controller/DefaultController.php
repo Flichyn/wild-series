@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\CategoryRepository;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,5 +56,13 @@ class DefaultController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstr
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    public function navbarTop(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('includes/navbartop.html.twig', [
+            'categories' => $categoryRepository->findBy([], ['id' => 'DESC'])
+        ]);
+
     }
 }
