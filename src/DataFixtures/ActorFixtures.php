@@ -20,6 +20,13 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
             $actor = new Actor();
             $actor->setName($faker->name);
             $actor->addProgram($this->getReference('program_' . rand(0,5)));
+
+//            // recup l'image, la copier dans uploads/gifts et stocker son nom en bdd
+//            $image = 'https://loremflickr.com/320/240/actor';
+//            $path = uniqid() . '.jpg';
+//            copy($image, __DIR__ . '/../../public/uploads/actors/' . $path);
+//            $gift->setPath($path);
+
             $manager->persist($actor);
             $this->addReference('actor_' . $i, $actor);
         }

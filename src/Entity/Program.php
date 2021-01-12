@@ -6,8 +6,10 @@ use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
@@ -15,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     "title",
  *     message="Cette série existe déjà."
  * )
+ * @Vich\Uploadable
  */
 class Program
 {
@@ -42,6 +45,17 @@ class Program
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
+
+    /**
+     * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
+     * @var File|null
+     */
+    private $posterFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
@@ -209,5 +223,19 @@ class Program
         $this->owner = $owner;
 
         return $this;
+    }
+
+    public function setPosterFile(File $image = null): Program
+    {
+        $this->posterFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
     }
 }

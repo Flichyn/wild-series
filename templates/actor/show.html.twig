@@ -2,6 +2,7 @@
 {% block title %}{{ parent() }} | {{ actor.name }}{% endblock %}
 {% block body %}
     <h1>{{ actor.name }}</h1>
+    <img src="{{ asset('uploads/' ~ actor.picture) }}" alt="{{ actor.name }}">
     <ul>Vous pouvez retrouver cet acteur dans ces séries :
         {% for program in actor.programs %}
             <li><a href="{{ path("program_show", { slug: program.slug }) }}">{{ program.title }}</a></li>
