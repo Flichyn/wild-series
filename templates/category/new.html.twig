@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Add a new category</h1>
+    <h1>{{ 'category.add'|trans }}</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type='submit' value='Ajouter une catégorie'>
+    <input type='submit' value='{{ 'add.entity'|trans }}'>
     {{ form_end(form) }}
 {% endblock %}

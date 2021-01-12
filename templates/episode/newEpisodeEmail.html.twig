@@ -1,5 +1,5 @@
 {% extends 'layoutEmail.html.twig' %}
-{% block title %}<title>A new episode has been published !</title>{% endblock %}
+{% block title %}<title>{{ 'emailEpisode.title'|trans }}</title>{% endblock %}
 {% block body %}
     <body>
     <h1>New episode {{ episode.title }} created</h1>

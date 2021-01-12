@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Wild Series</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,15 +8,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">{{ 'home.home'|trans }}<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">{{ 'series.series'|trans }}</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Dropdown
+                    {{ 'categories.categories'|trans }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {{ render(controller(
@@ -24,21 +24,38 @@
                     )) }}
                 </div>
             </li>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {% if app.user %}
+                    <li>
                     {{ app.user.email }}
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    <a href="{{ path('app_profile') }}">My account</a>
+                    <a href="{{ path('app_logout') }}">{{ 'account.login'|trans }}</a>
+                    <a href="{{ path('app_profile') }}">{{ 'account.account'|trans }}</a>
                 {% else %}
-                    <a href="{{ path('app_login') }}">Se connecter</a>
-                    <p>Vous ne possédez pas encore de compte ? <a href="{{ path('app_register') }}">Inscrivez-vous !</a>
+                    <a href="{{ path('app_login') }}">{{ 'account.login'|trans }}</a>
+                    <p>{{ 'account.noAccountYet'|trans }}<a
+                                href="{{ path('app_register') }}">{{ 'account.register'|trans }}</a>
                     </p>
+                    </li>
                 {% endif %}
             </div>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {{ 'language.language'|trans }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link title-light" href="{{ path('app_index', {'_locale':'fr'}) }}">Français</a>
+                    <a class="nav-link title-light" href="{{ path('app_index', {'_locale':'en'}) }}">English</a>
+                </div>
+
+
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'search.search'|trans }}</button>
         </form>
     </div>
 </nav>

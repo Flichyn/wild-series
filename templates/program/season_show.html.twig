@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ parent() }} | {{ program.title }} - Liste des épisodes de la saison {{ season.number }}{% endblock %}
+{% block title %}{{ parent() }} | {{ program.title }} - {{ 'season.episodeList'|trans }} {{ season.number }}{% endblock %}
 {% block body %}
-    <h1>{{ program.title }} - Saison {{ season.number }}</h1>
+    <h1>{{ program.title }} - {{ 'season.season'|trans }} {{ season.number }}</h1>
     <h2>{{ season.year }}</h2>
     <ul>
     {% for episode in season.episodes %}
         <li><a href="{{ path('program_episode_show',{program: program.slug, season: season.id, episode: episode.slug}) }}">{{ episode.number }} - {{ episode.title }}</a></li>
      {% else %}
-        <p>Nous n'avons pas encore les informations des épisodes pour cette série. Veuillez nous excuser.</p>
+        <p>{{ 'episode.noInformation'|trans }}</p>
     {% endfor %}
     </ul>
 {% endblock %}

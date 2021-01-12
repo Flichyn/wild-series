@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Season index{% endblock %}
+{% block title %}{{ 'season.list'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Season index</h1>
+    <h1>{{ 'season.list'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Number</th>
-                <th>Year</th>
+                <th>ID</th>
+                <th>{{ 'season.number'|trans }}</th>
+                <th>{{ 'season.year'|trans }}</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>{{ 'actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,17 +23,17 @@
                 <td>{{ season.year }}</td>
                 <td>{{ season.description }}</td>
                 <td>
-                    <a href="{{ path('season_show', {'id': season.id}) }}">show</a>
-                    <a href="{{ path('season_edit', {'id': season.id}) }}">edit</a>
+                    <a href="{{ path('season_show', {'id': season.id}) }}">{{ 'season.show'|trans }}</a>
+                    <a href="{{ path('season_edit', {'id': season.id}) }}">{{ 'season.edit' }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{{ 'season.noSeasonsFound'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('season_new') }}">Create new</a>
+    <a href="{{ path('season_new') }}">{{ 'season.add'|trans }}</a>
 {% endblock %}

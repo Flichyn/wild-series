@@ -1,32 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    {{ parent() }} | {{ program.title }} - Saison {{ season.number }} - Épisode {{ episode.number }}
+    {{ parent() }} | {{ program.title }} - {{ 'season.season'|trans}} {{ season.number }} - {{ 'episode.episode'|trans }} {{ episode.number }}
 {% endblock %}
 {% block body %}
-    <h1>{{ program.title }} - Saison {{ season.number }}</h1>
-    <h2>Épisode {{ episode.number }} - {{ episode.title }}</h2>
+    <h1>{{ program.title }} - {{ 'season.season'|trans }} {{ season.number }}</h1>
+    <h2>{{ 'episode.episode'|trans }} {{ episode.number }} - {{ episode.title }}</h2>
     <p>{{ episode.synopsis }}</p>
-    <h2>Commentaires</h2>
+    <h2>{{ 'comments.comments'|trans }}</h2>
     <ul>
         {% for comment in episode.comments %}
         <br>
         <li>
-            <p>Auteur : {{ comment.author.email }}</p>
-            <p>Note : {{ comment.rate }}</p>
-            <p>Commentaire : {{ comment.comment }}</p>
+            <p>{{ 'author.author'|trans }} : {{ comment.author.email }}</p>
+            <p>{{ 'note.note'|trans }} : {{ comment.rate }}</p>
+            <p>{{ 'comment.comment'|trans }} : {{ comment.comment }}</p>
             {% if is_granted("ROLE_ADMIN") or app.user == comment.author %}
                 {{ include('comment/_delete.html.twig') }}
             {% endif %}
         </li><br>
         {% else %}
-            <p>Aucun commentaire n'a été rédigé pour cet épisode.</p>
+            <p>{{ 'program.noCommentsFound'|trans }}</p>
         {% endfor %}
     </ul>
     {% if app.user %}
-        <h2>Écrire un commentaire</h2>
+        <h2>{{ 'program.writeComment'|trans }}</h2>
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Ajouter un commentaire">
+        <input type="submit" value="{{ 'program.addComment'|trans }}">
         {{ form_end(form) }}
     {% endif %}
 {% endblock %}

@@ -1,0 +1,70 @@
+welcome: 'Welcome !'
+episode.list: 'Episode list'
+title: Title
+number: Number
+synopsis: Synopsis
+actions: Actions
+episode.notFound: 'No episode was found.'
+episode.add: 'Add an episode'
+back.episodeList: 'Back to episodes list'
+delete: Delete
+emailEpisode.title: 'A new episode has been published !'
+episode.edit: 'Edit an episode'
+episode.episode: Episode
+title.title: Title
+episode.number: Number
+actor.otherSeries: 'You can find this actor in those series'
+actor.noSeriesFound: 'No actor was found.'
+back.programList: 'Back to programs list'
+season.list: 'Season list'
+season.number: Numéro
+season.year: Année
+season.show: 'Show season'
+season.noSeasonsFound: 'No season was found.'
+season.add: 'Add a season'
+back.seasonList: 'Back to seasons list'
+form.delete: Delete
+season.edit: 'Edit a season'
+season.season: Saison
+series.series: Program
+program.list: 'Programs list'
+search.search: Search
+categories.category: Category
+program.show: 'Show program'
+back.home: 'Back to home'
+program.add: 'Add a program'
+program.edit: 'Edit program'
+season.episodeList: 'Episodes list for that season'
+episode.noInformation: 'We do not have episodes informations about that program.'
+comments.comments: Commentaires
+author.author: Author
+note.note: Note
+comment.comment: Commentaire
+program.noCommentsFound: 'No comments was found.'
+program.writeComment: 'Write a comment'
+program.addComment: 'Add a comment'
+programs.program: Program
+actors.actors: Actors
+program.noActorsFound: 'No actors was found for that program'
+login: Login
+loggedAs: 'Logged as'
+logout: Logout
+notRegisteredYet: 'Not registered yet ?'
+registerRightNow: 'Register right now !'
+myProfile: 'My profile'
+register: Register
+home.home: Home
+categories.categories: Categories
+account.login: Login
+account.account: 'My account'
+account.noAccountYet: 'No account yet ?'
+account.register: 'Register !'
+language.language: Language
+category.list: 'Categories list'
+category.show: 'Show category'
+category.none: 'No category was found.'
+category.add: 'Add a category'
+add.entity: Submit
+category.category: Category
+category.noProgramsFound: 'No program was found.'
+delete.comment: 'Delete comment'

@@ -1,0 +1,73 @@
+home.home: Accueil
+account.logout: 'Se déconnecter'
+account.login: 'Se connecter'
+account.account: 'Mon compte'
+account.noAccountYet: 'Vous ne possédez pas encore de compte ?'
+account.register: 'Inscrivez-vous !'
+language.language: Langues
+search.search: Rechercher
+categories.categories: Catégories
+categories.category: Catégorie
+back.programList: 'Retour à la liste des séries'
+series.series: Séries
+actor.otherSeries: 'Vous pouvez retrouver cet acteur·rice dans ces séries'
+actor.noSeriesFound: 'Aucune série trouvée pour cet acteur.'
+category.list: 'Liste des catégories'
+category.show: 'Voir cette catégorie'
+category.none: 'Aucune catégorie trouvée.'
+back.home: 'Retour à l''accueil'
+category.add: 'Ajouter une catégorie'
+add.entity: Envoyer
+category.category: Catégorie
+program.show: 'Afficher la série'
+category.noProgramsFound: 'Aucune série trouvée dans cette catégorie.'
+delete.comment: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?'
+delete: Supprimer
+episode.edit: 'Éditer un épisode'
+back.episodeList: 'Retour à la liste des épisodes'
+episode.list: 'Liste des épisodes'
+title: Titre
+number: Numéro
+synopsis: Synopsis
+actions: Actions
+episode.notFound: 'Aucun épisode trouvé.'
+episode.add: 'Ajouter un épisode'
+emailEpisode.title: 'Un nouvel épisode a été ajouté !'
+episode.episode: Épisode
+title.title: Titre
+episode.number: Numéro
+form.delete: Supprimer
+program.edit: 'Éditer une série'
+season.season: Saison
+comments.comments: Commentaires
+author.author: Auteur
+note.note: Note
+comment.comment: Commentaire
+program.noCommentsFound: 'Aucun commentaire n''a été rédigé pour cet épisode.'
+program.writeComment: 'Écrire un commentaire'
+program.addComment: 'Ajouter un commentaire'
+program.list: 'Toutes les séries'
+programs.noProgramsFound: 'Aucune série trouvée.'
+program.add: 'Ajouter une série'
+season.episodeList: 'Liste des épisodes de la saison'
+episode.noInformation: 'Nous n''avons pas encore les informations des épisodes pour cette série.'
+programs.program: Série
+actors.actors: Acteurs
+program.noActorsFound: 'Aucun acteur pour cette série.'
+season.edit: 'Éditer une saison'
+back.seasonList: 'Retour à la liste des saisons'
+season.list: 'Liste des saisons'
+season.number: Numéro
+season.year: Année
+season.show: 'Afficher la saison'
+season.noSeasonsFound: 'Aucune saison trouvée.'
+season.add: 'Ajouter une saison'
+login: Connexion
+loggedAs: 'Vous êtes connecté en tant que'
+logout: Déconnexion
+notRegisteredYet: 'Vous ne possédez pas encore de compte ?'
+registerRightNow: 'Inscrivez-vous dès maintenant !'
+myProfile: 'Mon profil'
+register: Inscription
+welcome: 'Bienvenue !'
+programs.list: 'Liste des séries'

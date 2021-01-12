@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Create a new program</h1>
+    <h1>{{ 'program.add'|trans }}</h1>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form) }}
-    <input type='submit' value='Ajouter une série'>
+    <input type='submit' value='{{ 'program.add'|trans }}'>
     {{ form_end(form) }}
 {% endblock %}

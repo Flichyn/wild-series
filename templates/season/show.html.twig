@@ -1,22 +1,19 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Season{% endblock %}
-
+{% block title %}{{ 'season.season'|trans }}{% endblock %}
 {% block body %}
-    <h1>Season</h1>
-
+    <h1>{{ 'season.season'|trans }}</h1>
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <td>{{ season.id }}</td>
             </tr>
             <tr>
-                <th>Number</th>
+                <th>{{ 'season.number'|trans }}</th>
                 <td>{{ season.number }}</td>
             </tr>
             <tr>
-                <th>Year</th>
+                <th>{{ 'season.year'|trans }}</th>
                 <td>{{ season.year }}</td>
             </tr>
             <tr>
@@ -25,10 +22,7 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('season_index') }}">back to list</a>
-
-    <a href="{{ path('season_edit', {'id': season.id}) }}">edit</a>
-
+    <a href="{{ path('season_index') }}">{{ 'back.seasonList'|trans }}</a>
+    <a href="{{ path('season_edit', {'id': season.id}) }}">{{ 'season.edit'|trans }}</a>
     {{ include('season/_delete.html.twig') }}
 {% endblock %}

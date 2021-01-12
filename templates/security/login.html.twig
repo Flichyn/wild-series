@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'login'|trans }}{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,10 +10,10 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {{ 'loggedAs'|trans }} {{ app.user.username }}, <a href="{{ path('app_logout') }}">{{ 'logout'|trans }}</a>
         </div>
     {% else %}
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal">{{ 'login'|trans }}</h1>
         <label for="inputEmail">Email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
         <label for="inputPassword">Password</label>
@@ -35,9 +35,9 @@
         #}
 
         <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
+            {{ 'login'|trans }}
         </button>
-        <p>Not registered yet ? <a href="{{ path('app_register') }}">Register right now !</a></p>
+        <p>{{ 'notRegisteredYet'|trans }} <a href="{{ path('app_register') }}">{{ 'registerRightNow'|trans }}</a></p>
         </form>
     {% endif %}
 {% endblock %}

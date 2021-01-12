@@ -2,15 +2,15 @@
 {% block title %}{{ parent() }} | {{ actor.name }}{% endblock %}
 {% block body %}
     <h1>{{ actor.name }}</h1>
-    <ul>Vous pouvez retrouver cet acteur dans ces séries :
+    <ul>{{ 'actor.otherSeries'|trans }} :
         {% for program in actor.programs %}
             <li><a href="{{ path("program_show", { slug: program.slug }) }}">{{ program.title }}</a></li>
         {% else %}
-            Aucune série trouvée.
+        {{ 'actor.noSeriesFound'|trans }}
         {% endfor %}
     </ul>
 
     <a href="{{ path('program_index') }}">
-        Retour à la liste des programmes
+        {{ 'back.programList'|trans }}
     </a>
 {% endblock %}

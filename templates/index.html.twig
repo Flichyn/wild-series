@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Welcome !</h1>
-    <a href="{{ path('program_index') }}">Liste des programmes</a>
+    <h1>{{ 'welcome'|trans }}</h1>
+    <a href="{{ path('program_index') }}">{{ 'program.list'|trans }}</a>
 {% endblock %}

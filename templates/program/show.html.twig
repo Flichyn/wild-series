@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ parent() }} | Série #{{ program.id }}{% endblock %}
+{% block title %}{{ parent() }} | {{ 'programs.program'|trans }} {{ program.title }}{% endblock %}
 {% block body %}
     <h1>{{ program.title }}</h1>
     <div class="media">
@@ -10,29 +10,29 @@
                 <a id="watchlist">
                     <i id="watchlistIcon"
                        class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist"
-                       data-href="{{ path("program_watchlist", { "id": program.id}) }}"></i>
+                       data-href="{{ path("program_watchlist", { "id": program.id }) }}"></i>
                 </a>
             {% endif %}
             <p>{{ program.summary }}</p>
-            <p>Catégorie : {{ program.category.name }}</p>
+            <p>{{ 'categories.category'|trans }} : {{ program.category.name }}</p>
             {% for season in program.seasons %}
                 <a href="{{ path('program_season_show', {program: program.slug, season: season.id}) }}">{{ season.number }}</a>
             {% endfor %}
         </div>
     </div>
 
-    <strong>Acteurs :</strong>
+    <strong>{{ 'actors.actors'|trans }} :</strong>
     <ul>
         {% for actor in program.actors %}
             <li><a href="{{ path("actor_show", { id: actor.id }) }}">{{ actor.name }}</a></li>
         {% else %}
-            <li>Aucun acteur pour cette série</li>
+            <li>{{ 'program.noActorsFound'|trans }}</li>
         {% endfor %}
     </ul>
 
     {{ include('program/_delete_form.html.twig') }}
 
-    <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
+    <a href="{{ path('program_index') }}">{{ 'back.programList' }}</a>
 {% endblock %}{% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('watchlist') }}

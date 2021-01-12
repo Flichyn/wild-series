@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Episode index{% endblock %}
+{% block title %}{{ parent() }} | {{ 'episode.list'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Episode index</h1>
+    <h1>{{ 'episode.list'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Number</th>
-                <th>Synopsis</th>
-                <th>actions</th>
+                <th>ID</th>
+                <th>{{ 'title'|trans }}</th>
+                <th>{{ 'number'|trans }}</th>
+                <th>{{ 'synopsis'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,11 +29,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{{ 'episode.notFound'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('episode_new') }}">Create new</a>
+    <a href="{{ path('episode_new') }}">{{ 'episode.add'|trans }}</a>
 {% endblock %}

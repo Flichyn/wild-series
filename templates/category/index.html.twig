@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ parent() }} | Catégories{% endblock %}
+{% block title %}{{ parent() }} | {{ 'categories.categories'|trans }}{% endblock %}
 {% block body %}
-    <h1>Liste des catégories</h1>
+    <h1>{{ 'category.list'|trans }}</h1>
     {% for category in categories %}
         <div>
             <h2>{{ loop.index }} / {{ category.name }}</h2>
-            <a href="{{ path("category_show", { categoryName : category.name }) }}">Voir cette catégorie</a>
+            <a href="{{ path("category_show", { categoryName : category.name }) }}">{{ 'category.show'|trans }}</a>
         </div>
     {% else %}
-        Aucune catégorie trouvée.
+        {{ 'category.none'|trans }}
     {% endfor %}
 
-    <a href="{{ path('app_index') }}">Retour à l'accueil</a>
+    <a href="{{ path('app_index') }}">{{ 'back.home'|trans }}</a>
 {% endblock %}

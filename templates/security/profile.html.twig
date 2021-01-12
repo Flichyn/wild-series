@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | My profile{% endblock %}
+{% block title %}{{ parent() }} | {{ 'myProfile'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>My profile</h1>
+    <h1>{{ 'myProfile'|trans }}</h1>
 
     <p>Username : {{ app.user.username }}</p>
     <p>Email : {{ app.user.email }}</p>
